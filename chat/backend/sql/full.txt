@@ -1,0 +1,68 @@
+CREATE TABLE `chat`.`role` (
+  `id` INT(2) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `chat`.`user` (
+	`id` INT(11) NOT NULL auto_increment,
+    `username` varchar(45) not null,
+    `password` varchar(255) not null,
+    `role_id` INT(2) not null,
+    primary key(`id`),
+    index `role_id_user_idx` (`role_id` asc) visible,
+    constraint `role_id_user`
+		foreign key(`role_id`)
+        references `chat`.`role`(`id`)
+        on delete cascade
+        on update no action);
+
+CREATE TABLE `chat`.`room` (
+	`id` INT(11) NOT NULL auto_increment,
+    `name` varchar(45) not null,
+    `password` varchar(255) not null,
+    `max_users` INT(3) not null,
+    `creator_id` INT(11) not null,
+    primary key(`id`),
+    index `creator_id_room_idx` (`creator_id` asc) visible,
+    constraint `creator_id_room`
+		foreign key(`creator_id`)
+        references `chat`.`user`(`id`)
+        on delete cascade
+        on update no action);
+
+CREATE TABLE `chat`.`message` (
+	`id` INT(11) NOT NULL auto_increment,
+    `user_id` INT(11) not null,
+    `room_id` INT(11) not null,
+    `message` TEXT not null,
+    primary key(`id`),
+    index `user_id_message_idx` (`user_id` asc) visible,
+    index `room_id_message_idx` (`room_id` asc) visible,
+    constraint `user_id_message`
+		foreign key(`user_id`)
+        references `chat`.`user`(`id`)
+        on delete cascade
+        on update no action,
+	constraint `room_id_message`
+		foreign key(`room_id`)
+        references `chat`.`room`(`id`)
+        on delete cascade
+        on update no action);
+
+CREATE TABLE `chat`.`room_user` (
+	`id` INT(11) NOT NULL auto_increment,
+    `room_id` INT(11) not null,
+	`user_id` INT(11) not null,
+    primary key(`id`),
+    index `user_id_room_user_idx` (`user_id` asc) visible,
+    index `room_id_room_user_idx` (`room_id` asc) visible,
+    constraint `user_id_room_user`
+		foreign key(`user_id`)
+        references `chat`.`user`(`id`)
+        on delete cascade
+        on update no action,
+	constraint `room_id_room_user`
+		foreign key(`room_id`)
+        references `chat`.`room`(`id`)
+        on delete cascade
+        on update no action);
