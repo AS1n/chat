@@ -1,0 +1,10 @@
+﻿INSERT INTO `chat`.`role` (`id`, `name`) VALUES ('1', 'admin');
+INSERT INTO `chat`.`role` (`id`, `name`) VALUES ('2', 'user');
+
+INSERT INTO `chat`.`user` (`id`, `username`, `password`, `role_id`) VALUES ('1', 'Aslan', 'Aslan', '1');
+INSERT INTO `chat`.`user` (`id`, `username`, `password`, `role_id`) VALUES ('2', 'Sloven', 'Password', '2');
+
+INSERT INTO `chat`.`room` (`id`,`name`,`password`,`description`,`max_users`,`creator_id`) VALUES
+	('1', 'first','first','First room for ever',50,1),
+    ('2', 'second','second','Just second room',50,2);
+

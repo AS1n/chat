@@ -1,2 +1,0 @@
-INSERT INTO `chat`.`role` (`id`, `name`) VALUES ('1', 'admin');
-INSERT INTO `chat`.`role` (`id`, `name`) VALUES ('2', 'user');
