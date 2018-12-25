@@ -1,0 +1,116 @@
+<!--<app-navbar></app-navbar>-->
+
+<div class="row justify-content-center">
+  <h4 class="m-2 p-2">Register</h4>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-6 col-md-offset-3">
+    <form [formGroup]="formGroup" (validSubmit)="onSubmit()">
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          </div>
+          <input type="text" placeholder="Username" class="form-control" formControlName="Username">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-unlock"></i></span>
+          </div>
+          <input type="password" placeholder="Password" class="form-control" formControlName="Password">
+        </div>
+      </div>
+      <div *ngIf="incorrect">
+        <alert type="danger" dismissible="true" (onClosed)="closeAlert()">
+          This username is already in use
+        </alert>
+      </div>
+
+      <div class="row justify-content-end">
+        <button type="button" class="btn btn-primary pull-right m-2" routerLink="/login">Sign in</button>
+        <button class="btn btn-success m-2" type="submit">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!--<div class="row justify-content-cent  er">-->
+  <!--<div class="container col-6">-->
+    <!--<form>-->
+      <!--<div class="form-group">-->
+        <!--<div class="input-group">-->
+          <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text"><i class="fas fa-user"></i></span>-->
+          <!--</div>-->
+          <!--<input class="form-control" name="username_r" [(ngModel)]="this.editableUser.username" #username_r="ngModel" required />-->
+        <!--</div>-->
+        <!--<div [hidden]="username_r.valid || username_r.untouched" class="alert alert-danger">-->
+          <!--Please set username-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<div class="input-group">-->
+          <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text"><i class="fas fa-user"></i></span>-->
+          <!--</div>-->
+          <!--<input class="form-control" name="name_u" [(ngModel)]="this.editableUser.userInfo.name" #name_u="ngModel" required />-->
+        <!--</div>-->
+        <!--<div [hidden]="name_u.valid || name_u.untouched" class="alert alert-danger">-->
+          <!--Please set name-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<div class="input-group">-->
+          <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text"><i class="fas fa-unlock"></i></span>-->
+          <!--</div>-->
+          <!--<input type="password" class="form-control" name="password_r" [(ngModel)]="this.editableUser.password" #password_r="ngModel" required />-->
+        <!--</div>-->
+        <!--<div [hidden]="password_r.valid || password_r.untouched" class="alert alert-danger">-->
+          <!--Please set password-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<div class="input-group">-->
+          <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text"><i class="fas fa-unlock"></i></span>-->
+          <!--</div>-->
+          <!--<input type="password" class="form-control" name="conf_password" [(ngModel)]="this.confPass" #conf_password="ngModel" required />-->
+        <!--</div>-->
+        <!--<div [hidden]="conf_password.valid || conf_password.untouched" class="alert alert-danger">-->
+          <!--Please confirm password-->
+        <!--</div>-->
+        <!--<div [hidden]="conf_password.value == password_r.value" class="alert alert-danger">-->
+          <!--Confirm password is incorrect-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<div class="input-group">-->
+          <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>-->
+          <!--</div>-->
+          <!--<input type="text" name="dateOfBirth" [(ngModel)]="this.editableUser.userInfo.dateOfBirth" #dateOfBirth="ngModel"-->
+                 <!--placeholder="Date of birth"-->
+                 <!--class="form-control"-->
+                 <!--bsDatepicker>-->
+        <!--</div>-->
+        <!--<div [hidden]="dateOfBirth.valid || dateOfBirth.untouched" class="alert alert-danger">-->
+          <!--Please set date of birth-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="container">-->
+        <!--<div class="row justify-content-end">-->
+          <!--<button type="button" class="btn btn-success m-2" routerLink="/login">Sign in</button>-->
+          <!--<button type="submit" class="btn btn-primary m-2" (click)="register()"-->
+                  <!--[disabled]="username_r.invalid || password_r.invalid || name_u.invalid || dateOfBirth.invalid || conf_password.invalid || conf_password.value!=password_r.value">-->
+            <!--Register</button>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</form>-->
+  <!--</div>-->
+<!--</div>-->

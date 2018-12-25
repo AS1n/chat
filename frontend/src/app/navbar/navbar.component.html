@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a href="#top" class="navbar-brand">
+      <img src="assets/img/Aslan-logo.png" width="40" height="40" alt="logo">
+    </a>
+
+    <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+      aria-controls="navbarSupportedContent"><span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbarSupportedContent" [collapse]="isCollapsed" class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a routerLink="" class="nav-link">Home</a>
+        </li>
+        <li *ngIf="role=='1'" class="nav-item">
+          <a routerLink="/users" class="nav-link">Users</a>
+        </li>
+        <li *ngIf="role!='3'" class="nav-item">
+          <a routerLink="/rooms/own/{{currentUser.id}}" class="nav-link">Own rooms</a>
+        </li>
+      </ul>
+
+      <form class="form-inline my-2 my-lg-0">
+        <button *ngIf="role!='3'" disabled class="btn btn-outline-warning mr-sm-2">{{currentUser.username}}</button>
+        <button *ngIf="role=='3'" type="button" class="btn btn-primary" routerLink="/login">Sign in</button>
+        <button *ngIf="role!='3'" type="button" class="btn btn-primary" (click)="signOut()">Sign out</button>
+      </form>
+
+    </div>
+  </div>
+</nav>
+
+<!--<ng-template #editTemplate>-->
+  <!--<form [formGroup]="editUserGroup" (validSubmit)="editUser()">-->
+    <!--<div class="modal-header">-->
+      <!--<h4 class="modal-title pull-left">Edit user</h4>-->
+      <!--<button type="button" class="close pull-right" aria-label="Close" (click)="_closeModal()">-->
+        <!--<span aria-hidden="true">&times;</span>-->
+      <!--</button>-->
+    <!--</div>-->
+    <!--<div class="modal-body">-->
+      <!--<div class="form-group">-->
+        <!--<label>Username</label>-->
+        <!--<div class="input-group">-->
+          <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text"><i class="fas fa-user"></i></span>-->
+          <!--</div>-->
+        <!--<input class="form-control" formControlName="Username" />-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div *ngIf="incorrect">-->
+        <!--<alert type="danger" dismissible="true" (onClosed)="closeAlert()">-->
+          <!--Incorrect username or password-->
+        <!--</alert>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="modal-footer">-->
+      <!--<button type="submit" class="btn btn-primary">Save</button>-->
+      <!--<button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeModal()">Close</button>-->
+    <!--</div>-->
+  <!--</form>-->
+<!--</ng-template>-->
