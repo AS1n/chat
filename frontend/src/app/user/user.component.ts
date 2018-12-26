@@ -5,7 +5,6 @@ import { Subscription } from "rxjs/internal/Subscription";
 import { UserService } from "../service/user/user.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {Role} from "../model/role";
-import {RoleService} from "../service/role/role.service";
 import {toNumber} from "ngx-bootstrap/timepicker/timepicker.utils";
 
 @Component({
@@ -30,7 +29,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
   constructor(
     private userService: UserService,
-    // private roleService: RoleService,
+    // private roleService: MessageService,
     private modalService: BsModalService,
     private loadingService: NgxSpinnerService,
   ) {}

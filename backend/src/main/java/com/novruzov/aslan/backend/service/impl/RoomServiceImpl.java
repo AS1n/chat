@@ -1,6 +1,7 @@
 package com.novruzov.aslan.backend.service.impl;
 
 import com.novruzov.aslan.backend.entity.Room;
+import com.novruzov.aslan.backend.entity.User;
 import com.novruzov.aslan.backend.repository.RoomRepository;
 import com.novruzov.aslan.backend.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,13 @@ public class RoomServiceImpl implements RoomService {
         Pageable pageable = new PageRequest(page-1, size, new Sort(Sort.Direction.ASC, "id"));
         return repository.findRoomsByUserId(pageable, manager_id);
     }
+
+    @Override
+    public Set<User> getUsersByRoomId(Long room_id) {
+        Room room = repository.findById(room_id).get();
+        return room.getUsers();
+    }
+
 
 
     @Override

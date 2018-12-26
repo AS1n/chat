@@ -4,6 +4,10 @@ import com.novruzov.aslan.backend.entity.Message;
 import com.novruzov.aslan.backend.repository.MessageRepository;
 import com.novruzov.aslan.backend.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -30,6 +34,12 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public Iterable<Message> getAllMessages() {
         return repository.findAll();
+    }
+
+    @Override
+    public Page<Message> getMessagesByRoom(Integer page, Integer size, Long roomId) {
+        Pageable pageable = new PageRequest(page-1, size, new Sort(Sort.Direction.DESC, "id"));
+        return repository.findMessagesByRoomId(pageable, roomId);
     }
 
     @Override

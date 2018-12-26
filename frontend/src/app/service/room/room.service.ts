@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/internal/Observable";
 import {Room} from "../../model/room";
+import {User} from "../../model/user";
 
 @Injectable({
   providedIn: "root"
@@ -35,6 +36,10 @@ export class RoomService {
     if(manager_id)
       url += "&manager_id=" + manager_id;
     return this.http.get<number>(url);
+  }
+
+  getUsersInRoom(roomId: string): Observable<User[]> {
+    return this.http.get<User[]>("/api/rooms/users?room_id="+roomId);
   }
 
   getRoomById(prodId: string): Observable<Room> {

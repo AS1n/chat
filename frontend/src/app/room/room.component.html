@@ -1,3 +1,165 @@
-<p>
-  room works!
-</p>
+
+<ngx-spinner
+  bdColor = "rgba(51,51,51,0.8)"
+  size = "large"
+  color = "#27e9d2"
+  type = "ball-climbing-dot"
+></ngx-spinner>
+
+<div class="container" *ngIf="room">
+    <div class="row justify-content-center">
+      <h3>{{room.name}}</h3>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <div class="chat_users">
+          <div class="m-1" *ngFor="let user of users">
+            {{user.username}}
+          </div>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="chat_body">
+          <div class="m-2" *ngFor="let _message of messages">
+            {{_message.user.username}}: {{_message.message}}
+          </div>
+        </div>
+        <form>
+          <div class="row justify-content-around">
+            <div class="form-group m-2 col-9">
+              <input type="text" placeholder="Your message" name="Message1" [(ngModel)]="this.message" #message1="ngModel" class="form-control">
+            </div>
+            <button type="submit" [disabled]="message1.invalid" class="btn btn-success m-2 col-2" (click)="sendMessage()">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<!--<ng-template #subscribeReactiveForm>-->
+  <!--<form [formGroup]="formGroup" (validSubmit)="onSubmit()">-->
+    <!--<div class="modal-header">-->
+      <!--<h4 class="modal-title pull-left">Subscribe on {{room.name}}</h4>-->
+      <!--<button type="button" class="close pull-right" aria-label="Close" (click)="_closeModal()">-->
+        <!--<span aria-hidden="true">&times;</span>-->
+      <!--</button>-->
+    <!--</div>-->
+    <!--<div class="modal-body">-->
+      <!--<div class="form-group">-->
+        <!--<div class="input-group">-->
+          <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>-->
+          <!--</div>-->
+          <!--<input type="text"-->
+                 <!--placeholder="Start of using"-->
+                 <!--class="form-control"-->
+                 <!--bsDatepicker-->
+                 <!--[minDate]="minDate"-->
+                 <!--[maxDate]="maxDate"-->
+                 <!--formControlName = "Start">-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<div class="input-group">-->
+          <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>-->
+          <!--</div>-->
+          <!--<input type="text"-->
+                 <!--placeholder="End of using"-->
+                 <!--class="form-control"-->
+                 <!--bsDatepicker-->
+                 <!--[minDate]="minDate"-->
+                 <!--[maxDate]="maxDate"-->
+                 <!--formControlName = "End">-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<div class="input-group">-->
+          <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text"><i class="fas fa-wallet"></i></span>-->
+          <!--</div>-->
+          <!--<select class="select form-control" formControlName="Wallet">-->
+            <!--<option *ngFor="let wall of wallets" value="{{wall.id}}">{{wall.name}} ({{wall.value}}{{wall.valute}})</option>-->
+          <!--</select>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<div *ngIf="incorrect">-->
+        <!--<alert type="danger" dismissible="true" (onClosed)="closeAlert()">-->
+          <!--End date must be later than start date!-->
+        <!--</alert>-->
+      <!--</div>-->
+
+      <!--<div class="row justify-content-end">-->
+        <!--<button type="button" class="btn btn-secondary m-2" data-dismiss="modal" (click)="_closeModal()">Close</button>-->
+        <!--<button class="btn btn-success m-2" type="submit">Subscribe</button>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</form>-->
+
+<!--</ng-template>-->
+
+<!--<ng-template #subscribeForm>-->
+  <!--<form>-->
+    <!--<div class="modal-header">-->
+      <!--<h4 class="modal-title pull-left">Subscribe</h4>-->
+      <!--<button type="button" class="close pull-right" aria-label="Close" (click)="_closeModal()">-->
+        <!--<span aria-hidden="true">&times;</span>-->
+      <!--</button>-->
+    <!--</div>-->
+    <!--<div class="modal-body">-->
+      <!--<div class="form-group">-->
+        <!--<label>Name</label>-->
+        <!--<input class="form-control" name="Name" [(ngModel)]="subscription.room.name" #name="ngModel" readonly/>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<label>Start date</label>-->
+        <!--<div class="input-group">-->
+          <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>-->
+          <!--</div>-->
+          <!--<input type="text" name="Start" [(ngModel)]="subscription.start" #start="ngModel"-->
+                 <!--placeholder="Start of using"-->
+                 <!--class="form-control"-->
+                 <!--bsDatepicker>-->
+        <!--</div>-->
+        <!--<div [hidden]="start.valid || start.untouched" class="alert alert-danger">-->
+          <!--Please set start date-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<label>End date</label>-->
+        <!--<div class="input-group">-->
+          <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>-->
+          <!--</div>-->
+          <!--<input type="text" name="End" [(ngModel)]="subscription.end" #end="ngModel"-->
+                 <!--placeholder="Start of using"-->
+                 <!--class="form-control"-->
+                 <!--bsDatepicker>-->
+        <!--</div>-->
+        <!--<div [hidden]="end.valid || end.untouched" class="alert alert-danger">-->
+          <!--Please set end date-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="form-group">-->
+        <!--<label>Wallet</label>-->
+        <!--<select class="select form-control" name="Wallet" [(ngModel)]="userWalletId" #wallet="ngModel" required>-->
+          <!--<option *ngFor="let wall of wallets" value="{{wall.id}}">{{wall.name}} ({{wall.value}}{{wall.valute}})</option>-->
+        <!--</select>-->
+        <!--<div [hidden]="wallet.valid || wallet.untouched" class="alert alert-danger">-->
+          <!--Please choose wallet-->
+        <!--</div>-->
+      <!--</div>-->
+
+    <!--</div>-->
+    <!--<div class="modal-footer">-->
+      <!--<button type="button" class="btn btn-default" (click)="subscribe()"-->
+              <!--[disabled]="name.invalid || start.invalid || end.invalid || wallet.invalid">-->
+        <!--Subscribe-->
+      <!--</button>-->
+      <!--<button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeModal()">Close</button>-->
+    <!--</div>-->
+  <!--</form>-->
+<!--</ng-template>-->

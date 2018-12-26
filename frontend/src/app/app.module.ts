@@ -33,7 +33,7 @@ import { MyRoomsComponent } from './my-rooms/my-rooms.component';
 const appRoutes: Routes = [
   { path: '', redirectTo: '/rooms', pathMatch: 'full' },
   { path: 'rooms', component: RoomsComponent},
-  { path: 'room/id/:id', component: RoomComponent },
+  { path: 'rooms/id/:id', component: RoomComponent },
   { path: 'rooms/own/:id', component: RoomsComponent },
   // { path: 'my-rooms', component: MyRoomsComponent },
   { path: 'login', component: LoginComponent },

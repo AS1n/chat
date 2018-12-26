@@ -3,6 +3,7 @@ package com.novruzov.aslan.backend.controller;
 import com.novruzov.aslan.backend.entity.Message;
 import com.novruzov.aslan.backend.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,11 +30,21 @@ public class MessageController {
         }
     }
 
-
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public Iterable<Message> getAllMessages() {
-        return messageService.getAllMessages();
+    public Iterable<Message> getMessagesByRoom(
+            @RequestParam(name = "page") Integer pageNumber,
+            @RequestParam(name = "size") Integer size,
+        @RequestParam(name = "room_id") Long roomId ) {
+        Page page = messageService.getMessagesByRoom(pageNumber, size, roomId);
+        return page.getContent();
     }
+
+
+
+//    @RequestMapping(value = "", method = RequestMethod.GET)
+//    public Iterable<Message> getAllMessages() {
+//        return messageService.getAllMessages();
+//    }
 
     @RequestMapping(method = RequestMethod.POST)
     public Message saveMessage(@RequestBody Message message) {

@@ -1,0 +1,9 @@
+.chat_body {
+  border: 3px solid aqua;
+  border-radius: 10px;
+}
+
+.chat_users {
+  border: 3px solid lawngreen;
+  border-radius: 10px;
+}

@@ -107,6 +107,10 @@ export class RoomsComponent implements OnInit, OnDestroy {
   }
 
   public _openEnterModal(template: TemplateRef<any>, room: Room): void {
+    if(this.currentUser.role.id == '3') {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.selectedRoom = room;
     this.modalRef = this.modalService.show(template);
   }
@@ -167,22 +171,10 @@ export class RoomsComponent implements OnInit, OnDestroy {
     if(this.selectedRoom.password == this.enteredPassword){
       this._closeModal();
       this.router.navigate(["/rooms/id/"+this.selectedRoom.id]);
+      // todo: saving this connection on database
     }
     else this.incorrect = true;
   }
-
-  // public _shortDescription(description: string): string {
-  //   let end: number;
-  //   for(let j: number = 100; j>0; j--) {
-  //     if(description[j] === ' ') {
-  //       end = j;
-  //       break;
-  //     }
-  //   }
-  //   let shortDesc = description.slice(0,end);
-  //   shortDesc+='...';
-  //   return shortDesc;
-  // }
 
   getFields(): void {
     this.editableRoom.name = this.formGroup.value.Name;

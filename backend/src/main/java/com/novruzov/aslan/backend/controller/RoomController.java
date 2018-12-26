@@ -1,6 +1,7 @@
 package com.novruzov.aslan.backend.controller;
 
 import com.novruzov.aslan.backend.entity.Room;
+import com.novruzov.aslan.backend.entity.User;
 import com.novruzov.aslan.backend.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,6 +45,12 @@ public class RoomController {
         if(manager_id!=null)
             return roomService.getOwnPage(1,size,manager_id).getTotalPages();
         return roomService.getPage(1, size).getTotalPages();
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public Iterable<User> getUsersInRoom(
+            @RequestParam(name = "room_id") Long room_id) {
+        return roomService.getUsersByRoomId(room_id);
     }
 
 
